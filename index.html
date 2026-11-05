@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#183e39">
+  <title>KameyMall spreadsheet: kleding, sneakers en praktische kooptips</title>
+  <meta name="description" content="Gebruik een KameyMall spreadsheet om gericht te vergelijken. Ontdek kledingcategorieën, tips voor maten, QC-foto’s en een overzichtelijke kostencheck.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="nl_NL">
+  <meta property="og:title" content="KameyMall spreadsheet — eerst vergelijken, dan kiezen">
+  <meta property="og:description" content="Een onafhankelijke Nederlandstalige gids voor productonderzoek, maattabellen, QC-foto’s en het plannen van je aankoop.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&amp;fit=crop&amp;w=1000&amp;q=80">
+  <meta property="og:image:alt" content="Rode Nike-sportschoen tegen een rode achtergrond">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="KameyMall spreadsheet: van inspiratie naar een goede vergelijking">
+  <meta name="twitter:description" content="Categorieën, maten, fotocontrole en kosten: een praktische gids in het Nederlands.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&amp;fit=crop&amp;w=1000&amp;q=80">
+
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f4ec;
+      --white: #fffefa;
+      --ink: #19332f;
+      --green: #183e39;
+      --muted: #53655d;
+      --line: #d7ded2;
+      --yellow: #e9f18b;
+      --soft: #e8ede2;
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-underline-offset: .22em; }
+    a:hover { text-decoration-thickness: 2px; }
+    a:focus-visible, summary:focus-visible {
+      outline: 3px solid #b35b29;
+      outline-offset: 5px;
+    }
+    img { display: block; width: 100%; height: auto; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { line-height: 1.16; }
+    h1 { font-size: clamp(2.7rem, 6vw, 5.2rem); letter-spacing: -.055em; margin-bottom: 24px; }
+    h2 { font-size: clamp(1.8rem, 3vw, 2.75rem); letter-spacing: -.035em; }
+    h3 { font-size: 1.22rem; letter-spacing: -.02em; }
+    p { margin-bottom: 18px; }
+    .wrap { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+    .masthead {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 20px; padding-block: 24px; border-bottom: 1px solid var(--line);
+    }
+    .logo { font-size: 1.24rem; font-weight: 850; text-decoration: none; letter-spacing: -.04em; }
+    .logo span { color: var(--muted); font-weight: 450; }
+    .masthead p { margin: 0; font-size: .85rem; color: var(--muted); }
+    .category-section { padding-block: 25px 32px; }
+    .eyebrow {
+      font-size: .75rem; font-weight: 800; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 13px;
+    }
+    .category-section h2 { font-size: 1.2rem; letter-spacing: -.02em; margin-bottom: 18px; }
+    .categories { display: grid; grid-template-columns: repeat(5, 1fr); gap: 9px; }
+    .categories a {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 8px; padding: 13px 14px; border: 1px solid var(--line);
+      border-radius: 8px; background: var(--white);
+      font-size: .88rem; font-weight: 650; text-decoration: none;
+    }
+    .categories a:hover { background: var(--yellow); border-color: var(--green); }
+    .categories b { font-weight: 450; }
+    .hero {
+      display: grid; grid-template-columns: 1.08fr .92fr;
+      background: var(--green); color: var(--white);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .hero-copy { padding: clamp(28px, 4vw, 55px); }
+    .hero .eyebrow { color: var(--yellow); }
+    .hero-copy > p:not(.eyebrow) { color: #e1ebe4; max-width: 49ch; }
+    .hero figure { margin: 0; position: relative; min-height: 440px; background: #ce2629; }
+    .hero img { height: 100%; object-fit: cover; }
+    .hero figcaption {
+      position: absolute; bottom: 14px; left: 14px; right: 14px;
+      padding: 9px 12px; border-radius: 7px; font-size: .75rem;
+      background: rgba(20, 34, 30, .87); color: white;
+    }
+    .button {
+      display: inline-flex; justify-content: center; align-items: center;
+      min-height: 48px; padding: 11px 20px;
+      background: var(--yellow); color: var(--ink);
+      border-radius: 7px; font-weight: 750; text-decoration: none;
+    }
+    .button:hover { background: #f4f8b9; }
+    .hero-note { display: block; margin-top: 16px; font-size: .78rem; color: #d7e3dc; }
+    .answer {
+      display: grid; grid-template-columns: 210px 1fr; gap: 30px;
+      padding: 30px 0; border-bottom: 1px solid var(--line);
+    }
+    .answer h2 { margin: 0; font-size: 1.15rem; }
+    .answer p { margin: 0; max-width: 83ch; }
+    .section { padding-top: 66px; }
+    .section-heading { max-width: 740px; margin-bottom: 28px; }
+    .section-heading p { color: var(--muted); }
+    .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .pillar { background: var(--soft); padding: 24px; border-radius: 12px; }
+    .number { display: block; color: var(--muted); font-size: .8rem; margin-bottom: 28px; }
+    .pillar p { font-size: .94rem; margin-bottom: 0; }
+    .editorial { display: grid; grid-template-columns: .85fr 1.15fr; gap: 36px; align-items: start; }
+    .editorial figure { margin: 0; }
+    .editorial img { aspect-ratio: 1 / 1.05; object-fit: cover; border-radius: var(--radius); }
+    figcaption { font-size: .79rem; color: var(--muted); margin-top: 10px; }
+    .guide {
+      padding-block: 24px; border-top: 1px solid var(--line);
+    }
+    .guide:first-child { padding-top: 0; border-top: 0; }
+    .guide:last-child p:last-child { margin-bottom: 0; }
+    .guide p { color: var(--muted); }
+    .guide strong { color: var(--ink); }
+    .table-shell { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--white); }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: .94rem; }
+    th, td { padding: 17px 20px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { background: var(--soft); font-weight: 750; }
+    tbody tr:last-child td { border-bottom: 0; }
+    .note { font-size: .86rem; color: var(--muted); margin-top: 14px; }
+    .articles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .article { padding: 27px; background: var(--white); border: 1px solid var(--line); border-radius: 12px; }
+    .article p { font-size: .94rem; color: var(--muted); }
+    .article p:last-child { margin-bottom: 0; }
+    .article .eyebrow { color: var(--muted); font-size: .7rem; }
+    .faq-layout { display: grid; grid-template-columns: .7fr 1.3fr; gap: 50px; }
+    details { border-bottom: 1px solid var(--line); }
+    summary { padding: 20px 30px 20px 0; cursor: pointer; font-weight: 700; }
+    details p { color: var(--muted); padding-right: 20px; }
+    .research { margin-top: 45px; padding: 24px; background: var(--soft); border-radius: 12px; }
+    .research summary { padding-block: 0; }
+    .research[open] summary { padding-bottom: 20px; }
+    .research p { font-size: .86rem; }
+    .research .table-shell { margin-top: 20px; }
+    .research table { font-size: .82rem; }
+    .closing {
+      margin-top: 65px; padding: 36px;
+      display: flex; align-items: center; justify-content: space-between; gap: 25px;
+      background: var(--green); color: var(--white); border-radius: var(--radius);
+    }
+    .closing h2 { font-size: 1.8rem; margin-bottom: 10px; }
+    .closing p { margin: 0; color: #dbe8df; }
+    footer { padding-block: 33px; color: var(--muted); font-size: .8rem; }
+    footer p { max-width: 100ch; }
+    @media (max-width: 940px) {
+      .categories { grid-template-columns: repeat(3, 1fr); }
+      .hero { grid-template-columns: 1fr 1fr; }
+      .pillars { grid-template-columns: repeat(2, 1fr); }
+      .articles { grid-template-columns: 1fr; }
+      .editorial { gap: 24px; }
+    }
+    @media (max-width: 650px) {
+      .wrap { width: min(100% - 28px, 1180px); }
+      .masthead { align-items: start; padding-block: 18px; }
+      .masthead p { max-width: 125px; font-size: .75rem; text-align: right; }
+      .categories { grid-template-columns: repeat(2, 1fr); }
+      .categories a { padding: 12px; font-size: .8rem; }
+      .hero, .editorial, .faq-layout, .answer { grid-template-columns: 1fr; }
+      .hero figure { min-height: 0; }
+      .hero img { height: auto; aspect-ratio: 4 / 3; }
+      .answer { gap: 14px; }
+      .section { padding-top: 44px; }
+      .pillar { padding: 19px; }
+      .pillar h3 { font-size: 1.1rem; }
+      .number { margin-bottom: 20px; }
+      .editorial img { aspect-ratio: 4 / 3; }
+      .faq-layout { gap: 10px; }
+      .closing { flex-direction: column; align-items: start; padding: 27px; }
+      th, td { padding: 13px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "#pagina",
+        "name": "KameyMall spreadsheet: kleding, sneakers en praktische kooptips",
+        "description": "Een onafhankelijke Nederlandstalige gids voor het vergelijken van producten, maten, QC-foto’s en aankoopkosten.",
+        "inLanguage": "nl",
+        "about": {
+          "@type": "Thing",
+          "name": "KameyMall spreadsheet",
+          "description": "Een productoverzicht als hulpmiddel bij het zoeken en vergelijken."
+        },
+        "hasPart": [
+          {"@id": "#artikel-maten"},
+          {"@id": "#artikel-qc"},
+          {"@id": "#artikel-kosten"},
+          {"@id": "#vragen"}
+        ]
+      },
+      {
+        "@type": "Article",
+        "@id": "#artikel-maten",
+        "headline": "Sneakers en kleding: vergelijk centimeters",
+        "description": "Een praktische uitleg over voetlengte, binnenzoolmetingen en het vergelijken van kledingmaten.",
+        "inLanguage": "nl",
+        "articleBody": "Meet beide voeten en vraag welke meetmethode de verkoper gebruikt. Voetlengte en binnenzoollengte zijn verschillende maten. Vergelijk kleding met een passend kledingstuk dat je plat neerlegt. Controleer borstbreedte, schouders, lengte en mouwen."
+      },
+      {
+        "@type": "Article",
+        "@id": "#artikel-qc",
+        "headline": "QC-foto’s: kijk verder dan de eerste indruk",
+        "description": "Een controlelijst voor kleur, uitvoering, afwerking en productfoto’s.",
+        "inLanguage": "nl",
+        "articleBody": "Vergelijk QC-foto’s met de bestelde kleur, maat en uitvoering. Bekijk naden, sluitingen, zolen en zichtbare beschadigingen. Vraag extra detailfoto’s wanneer iets onduidelijk is. Foto’s alleen bewijzen geen authenticiteit."
+      },
+      {
+        "@type": "Article",
+        "@id": "#artikel-kosten",
+        "headline": "Kosten plannen zonder verrassend rekenwerk",
+        "description": "Een uitleg over het apart vastleggen van productkosten, verzending en overige toepasselijke kosten.",
+        "inLanguage": "nl",
+        "articleBody": "Noteer de artikelprijs, binnenlandse verzending, eventuele betaal- of servicekosten, verpakking, internationale verzending en toepasselijke invoerkosten afzonderlijk. Vergelijk verzendoffertes voor hetzelfde pakket en dezelfde bestemming."
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "#vragen",
+        "inLanguage": "nl",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Wat is een KameyMall spreadsheet?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Een KameyMall spreadsheet is een overzicht met productverwijzingen dat helpt om artikelen te vinden en te vergelijken. Controleer de actuele productpagina voordat je een aankoopbeslissing neemt."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Kan ik hier een spreadsheet downloaden of bestellen?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nee. Deze pagina bevat een leesbare koopgids en categorieknoppen, geen downloadbare productspreadsheet of eigen bestelomgeving. De categorieknoppen openen de opgegeven categorie op Cafans; andere links openen de homepage van Cafans."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Hoe vind ik de juiste maat voor sneakers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Meet beide voeten en vergelijk de grootste voet met de productspecifieke maattabel. Vraag na of een vermelde lengte de voet of de binnenzool betreft. Vertrouw niet alleen op je gebruikelijke EU-maat."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Bewijzen QC-foto’s dat een merkartikel authentiek is?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nee. QC-foto’s helpen bij het beoordelen van zichtbare eigenschappen en de gekozen uitvoering. Voor authenticiteit zijn betrouwbare herkomstinformatie en zo nodig een deskundige beoordeling nodig."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is de artikelprijs ook het totaalbedrag?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Niet automatisch. Binnenlandse verzending, eventuele betaal- of servicekosten, verpakking, internationale verzending en toepasselijke invoerkosten kunnen apart worden berekend. Controleer de volledige kostenopgave."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is deze gids officieel verbonden met KameyMall of de getoonde merken?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nee. Dit is een onafhankelijke informatiepagina. Merknamen en sfeerbeelden dienen ter herkenning en inspiratie en tonen geen officiële samenwerking of gegarandeerde voorraad."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+<link rel="canonical" href="https://kakobuyfinds.github.io/ybouv/">
+</head>
+
+<body>
+  <header class="wrap masthead">
+    <a class="logo" href="https://www.cafans.com" aria-label="Cafans homepage">CAFANS <span>/ veldgids</span></a>
+    <p>Een rustig begin voor een gerichte keuze.</p>
+  </header>
+
+  <main class="wrap">
+    <section class="category-section" aria-labelledby="categorie-titel">
+      <h2 id="categorie-titel">Begin bij jouw categorie</h2>
+      <nav class="categories" aria-label="Productcategorieën op Cafans">
+        <a href="https://cafans.com/category-911-Shoes.html">Sneakers &amp; schoenen <b aria-hidden="true">↗</b></a>
+        <a href="https://cafans.com/category-912-Hoodies%2FSweaters.html">Hoodies &amp; sweaters <b aria-hidden="true">↗</b></a>
+        <a href="https://cafans.com/category-913-T-Shirts.html">T-shirts <b aria-hidden="true">↗</b></a>
+        <a href="https://cafans.com/category-914-Jackets.html">Jassen <b aria-hidden="true">↗</b></a>
+        <a href="https://cafans.com/category-915-Pants%2FShorts.html">Broeken &amp; shorts <b aria-hidden="true">↗</b></a>
+        <a href="https://cafans.com/category-916-Headwear.html">Petten &amp; mutsen <b aria-hidden="true">↗</b></a>
+        <a href="https://cafans.com/category-917-Sets.html">Kledingsets <b aria-hidden="true">↗</b></a>
+        <a href="https://cafans.com/category-918-underwear%2Funderpants.html">Ondergoed <b aria-hidden="true">↗</b></a>
+        <a href="https://cafans.com/category-919-Jersey.html">Sportshirts <b aria-hidden="true">↗</b></a>
+        <a href="https://cafans.com/category-920-Accessories.html">Accessoires <b aria-hidden="true">↗</b></a>
+      </nav>
+    </section>
+
+    <section class="hero" aria-labelledby="hoofdtitel">
+      <div class="hero-copy">
+        <p class="eyebrow">De Nederlandse koopgids</p>
+        <h1 id="hoofdtitel">KameyMall spreadsheet.<br>Eerst kijken.<br>Dan kiezen.</h1>
+        <p>Een mooie foto is het begin. De juiste maat, een duidelijke productbeschrijving en inzicht in de kosten maken je vergelijking pas bruikbaar.</p>
+        <p>Gebruik deze gids om je zoekopdracht aan te scherpen en met een korte, controleerbare selectie verder te gaan.</p>
+        <a class="button" href="https://www.cafans.com">Ontdek Cafans <span aria-hidden="true">&nbsp;↗</span></a>
+        <small class="hero-note">Onafhankelijke informatie. Geen officiële KameyMall-website.</small>
+      </div>
+      <figure>
+        <img
+          src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&amp;fit=crop&amp;w=960&amp;q=80"
+          width="960"
+          height="960"
+          alt="Rode Nike-sportschoen met witte swoosh tegen een rode achtergrond"
+          fetchpriority="high"
+          decoding="async">
+        <figcaption>Stijlinspiratie met Nike. Geen productaanbieding of voorraadindicatie.</figcaption>
+      </figure>
+    </section>
+
+    <section class="answer" aria-labelledby="kort-antwoord">
+      <h2 id="kort-antwoord">Wat heb je aan een productoverzicht?</h2>
+      <p>Een <strong>KameyMall spreadsheet</strong> helpt je productverwijzingen te ordenen en alternatieven te vergelijken. Behandel het als een vertrekpunt: de actuele productpagina moet bevestigen welke uitvoering, maat en voorwaarden werkelijk beschikbaar zijn.</p>
+    </section>
+
+    <section class="section" aria-labelledby="onderzoek-titel">
+      <div class="section-heading">
+        <p class="eyebrow">Vier onderwerpen om mee te beginnen</p>
+        <h2 id="onderzoek-titel">Van zoekwoord naar een bruikbare selectie</h2>
+        <p>Deze vier aanvullende zoekthema’s helpen je gerichter zoeken: KameyMall finds, KameyMall QC-foto’s, KameyMall maattabel en KameyMall verzendkosten.</p>
+      </div>
+
+      <div class="pillars">
+        <article class="pillar">
+          <span class="number">01 / ONTDEKKEN</span>
+          <h3>KameyMall finds</h3>
+          <p>Omschrijf het artikel, de gewenste kleur en het gebruik. Een specifieke zoekopdracht levert vaker vergelijkbare opties op dan alleen een merknaam.</p>
+        </article>
+        <article class="pillar">
+          <span class="number">02 / BEKIJKEN</span>
+          <h3>KameyMall QC-foto’s</h3>
+          <p>Zoek naar duidelijke detailbeelden van de gekozen uitvoering. Controleer de vorm, afwerking en zichtbare staat van het artikel.</p>
+        </article>
+        <article class="pillar">
+          <span class="number">03 / PASSEN</span>
+          <h3>KameyMall maattabel</h3>
+          <p>Vergelijk productspecifieke afmetingen met je eigen metingen. Hetzelfde maatlabel kan per model anders uitvallen.</p>
+        </article>
+        <article class="pillar">
+          <span class="number">04 / PLANNEN</span>
+          <h3>KameyMall verzendkosten</h3>
+          <p>Controleer de actuele offerte voor jouw bestemming. Pakketafmetingen, gewicht en verpakking horen bij dezelfde vergelijking.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section editorial" aria-labelledby="selectie-titel">
+      <figure>
+        <img
+          src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&amp;fit=crop&amp;w=780&amp;q=75"
+          width="780"
+          height="819"
+          alt="Nike-sneakers in warme bruintinten met zichtbare veters en zijpanelen"
+          loading="lazy"
+          decoding="async">
+        <figcaption>Let bij sneakers op de vorm, materialen en maatvoering; een sfeerfoto vervangt geen artikelcontrole.</figcaption>
+      </figure>
+
+      <div>
+        <p class="eyebrow">Een kleine selectie werkt beter</p>
+        <h2 id="selectie-titel">Bepaal eerst wat je echt wilt vergelijken.</h2>
+
+        <article class="guide">
+          <h3>Sneakers voor dagelijks gebruik vergelijken</h3>
+          <p>Begin met draagmoment en pasvorm. Bij <strong>Nike sneakers op maat kiezen</strong> zijn model, voetbreedte en de bijbehorende maattabel nuttiger dan alleen de schoenmaat op het label. Vraag bij twijfel naar een meting van de gekozen uitvoering.</p>
+        </article>
+
+        <article class="guide">
+          <h3>Hoodies op pasvorm selecteren</h3>
+          <p>Voor <strong>een oversized hoodie vergelijken</strong> kijk je naar borstbreedte, schouderlijn en lengte. Wil je <strong>een sweater op materiaal beoordelen</strong>, zoek dan naar samenstelling, stofstructuur en duidelijke productdetails.</p>
+        </article>
+
+        <article class="guide">
+          <h3>Accessoires op afmetingen beoordelen</h3>
+          <p>Bij <strong>een pet op hoofdomtrek kiezen</strong> telt het verstelbereik. Voor <strong>een tas op inhoud vergelijken</strong> noteer je breedte, hoogte en diepte. Bij <strong>sieraden op materiaal selecteren</strong> vraag je naar de opgegeven samenstelling en sluiting.</p>
+        </article>
+
+        <p class="note">Zoek je stijlen van Louis Vuitton, Gucci, Hermès of Dior? Controleer herkomst en verkopersinformatie afzonderlijk. Een merknaam of herkenbaar ontwerp bewijst geen authenticiteit.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="categorie-check">
+      <div class="section-heading">
+        <p class="eyebrow">Praktisch overzicht</p>
+        <h2 id="categorie-check">Wat controleer je per productgroep?</h2>
+        <p>Leg dezelfde gegevens naast elkaar. Zo voorkom je dat een fraaie foto een ontbrekende specificatie verbergt.</p>
+      </div>
+
+      <div class="table-shell" role="region" aria-label="Controlepunten per productgroep" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Je zoekt</th>
+              <th scope="col">Controleer eerst</th>
+              <th scope="col">Een nuttige vervolgvraag</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sneakers met de juiste pasvorm</td>
+              <td>Voetlengte, breedte en modelgebonden maattabel.</td>
+              <td>Gaat de lengte over de voet of de binnenzool?</td>
+            </tr>
+            <tr>
+              <td>T-shirts op borstbreedte vergelijken</td>
+              <td>Plat gemeten borstbreedte en totale lengte.</td>
+              <td>Welke meetmethode gebruikt de verkoper?</td>
+            </tr>
+            <tr>
+              <td>Een jas voor laagjes kiezen</td>
+              <td>Schouderbreedte, mouwlengte en ruimte over een trui.</td>
+              <td>Zijn de afmetingen van de jas of van het lichaam?</td>
+            </tr>
+            <tr>
+              <td>Broeken op taille en binnenbeenlengte zoeken</td>
+              <td>Taille, heupen, binnenbeen en rek van de stof.</td>
+              <td>Is de taille ontspannen of uitgerekt gemeten?</td>
+            </tr>
+            <tr>
+              <td>Shorts op lengte vergelijken</td>
+              <td>Buitenbeenlengte, beenopening en tailleband.</td>
+              <td>Heeft de broek een verstelbare taille?</td>
+            </tr>
+            <tr>
+              <td>Een kledingset in twee maten beoordelen</td>
+              <td>De afmetingen van bovenstuk en broek afzonderlijk.</td>
+              <td>Moeten beide onderdelen dezelfde maat hebben?</td>
+            </tr>
+            <tr>
+              <td>Ondergoed op samenstelling kiezen</td>
+              <td>Materiaal, tailleband en toepasselijke retourvoorwaarden.</td>
+              <td>Gelden er specifieke voorwaarden voor deze categorie?</td>
+            </tr>
+            <tr>
+              <td>Een sportshirt op uitvoering vergelijken</td>
+              <td>Pasvorm, opdruk, maatvoering en geselecteerde variant.</td>
+              <td>Komt de gekozen uitvoering overeen met de foto’s?</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="artikelen-titel">
+      <div class="section-heading">
+        <p class="eyebrow">Drie korte artikelen</p>
+        <h2 id="artikelen-titel">Minder gokken, beter vergelijken.</h2>
+        <p>Gebruik een KameyMall spreadsheet samen met concrete metingen, duidelijke foto’s en een volledig kostenoverzicht.</p>
+      </div>
+
+      <div class="articles">
+        <article class="article" id="artikel-maten" aria-labelledby="maten-titel">
+          <p class="eyebrow">Leesthema / maatvoering</p>
+          <h3 id="maten-titel">Sneakers en kleding: vergelijk centimeters</h3>
+          <p><strong>Voetlengte voor sneakers meten</strong> begint bij beide voeten. Meet staand en gebruik de grootste voet als uitgangspunt. Controleer hoe de verkoper zijn maattabel heeft opgebouwd.</p>
+          <p><strong>Binnenzoollengte en voetlengte vergelijken</strong> vraagt aandacht: het zijn verschillende maten. Neem een verschil niet automatisch over als vaste aanbevolen speling.</p>
+          <p>Voor <strong>kledingmaten met een eigen kledingstuk vergelijken</strong> leg je een goed passend artikel plat neer. Meet borst, schouders, lengte en mouwen volgens dezelfde methode als de verkoper.</p>
+        </article>
+
+        <article class="article" id="artikel-qc" aria-labelledby="qc-titel">
+          <p class="eyebrow">Leesthema / fotocontrole</p>
+          <h3 id="qc-titel">QC-foto’s: kijk verder dan de eerste indruk</h3>
+          <p><strong>QC-foto’s van sneakers beoordelen</strong> betekent de bestelde kleur en uitvoering naast de ontvangen beelden leggen. Bekijk ook zolen, naden en zichtbare beschadigingen.</p>
+          <p>Voor <strong>stiksels en sluitingen controleren</strong> zijn scherpe detailfoto’s nodig. Vraag aanvullende beelden als een belangrijk onderdeel buiten beeld valt.</p>
+          <p>Bij <strong>kleurverschil op productfoto’s beoordelen</strong> houd je rekening met licht en scherminstellingen. Foto’s kunnen zichtbare afwijkingen tonen, maar bewijzen op zichzelf geen authenticiteit.</p>
+        </article>
+
+        <article class="article" id="artikel-kosten" aria-labelledby="kosten-titel">
+          <p class="eyebrow">Leesthema / kosten</p>
+          <h3 id="kosten-titel">Kosten plannen zonder verrassend rekenwerk</h3>
+          <p><strong>De totale aankoopkosten berekenen</strong> lukt beter wanneer je artikelprijs, binnenlandse verzending, eventuele betaal- of servicekosten en internationale verzending apart vastlegt.</p>
+          <p>Voor <strong>verzendkosten naar Nederland vergelijken</strong> of <strong>verzending naar België plannen</strong> gebruik je de offerte voor je eigen bestemming en hetzelfde pakket.</p>
+          <p>Bij <strong>pakketgewicht en volumegewicht vergelijken</strong> controleer je welke berekening de vervoerder toepast. Neem ook verpakking en toepasselijke invoerkosten mee, voor zover die in de kostenopgave zijn gespecificeerd.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section faq-layout" aria-labelledby="faq-titel">
+      <div>
+        <p class="eyebrow">Direct antwoord</p>
+        <h2 id="faq-titel">Veelgestelde vragen</h2>
+        <p>De belangrijkste punten voordat je verder klikt.</p>
+      </div>
+
+      <div id="vragen">
+        <details open>
+          <summary>Wat is een KameyMall spreadsheet?</summary>
+          <p>Een KameyMall spreadsheet is een overzicht met productverwijzingen dat helpt om artikelen te vinden en te vergelijken. Controleer de actuele productpagina voordat je een aankoopbeslissing neemt.</p>
+        </details>
+        <details>
+          <summary>Kan ik hier een spreadsheet downloaden of bestellen?</summary>
+          <p>Nee. Deze pagina bevat een leesbare koopgids en categorieknoppen, geen downloadbare productspreadsheet of eigen bestelomgeving. De categorieknoppen openen de opgegeven categorie op Cafans; andere links openen de homepage van Cafans.</p>
+        </details>
+        <details>
+          <summary>Hoe vind ik de juiste maat voor sneakers?</summary>
+          <p>Meet beide voeten en vergelijk de grootste voet met de productspecifieke maattabel. Vraag na of een vermelde lengte de voet of de binnenzool betreft. Vertrouw niet alleen op je gebruikelijke EU-maat.</p>
+        </details>
+        <details>
+          <summary>Bewijzen QC-foto’s dat een merkartikel authentiek is?</summary>
+          <p>Nee. QC-foto’s helpen bij het beoordelen van zichtbare eigenschappen en de gekozen uitvoering. Voor authenticiteit zijn betrouwbare herkomstinformatie en zo nodig een deskundige beoordeling nodig.</p>
+        </details>
+        <details>
+          <summary>Is de artikelprijs ook het totaalbedrag?</summary>
+          <p>Niet automatisch. Binnenlandse verzending, eventuele betaal- of servicekosten, verpakking, internationale verzending en toepasselijke invoerkosten kunnen apart worden berekend. Controleer de volledige kostenopgave.</p>
+        </details>
+        <details>
+          <summary>Is deze gids officieel verbonden met KameyMall of de getoonde merken?</summary>
+          <p>Nee. Dit is een onafhankelijke informatiepagina. Merknamen en sfeerbeelden dienen ter herkenning en inspiratie en tonen geen officiële samenwerking of gegarandeerde voorraad.</p>
+        </details>
+      </div>
+    </section>
+
+    <details class="research">
+      <summary>Onderzoeksnotitie: zoekthema’s en geraadpleegde resultaten</summary>
+      <p>Voor deze gids zijn openbare zoekresultaten over het gekozen onderwerp bekeken. Een exacte, locatiegebonden Google-top 10 kon niet worden vastgesteld. Onderstaande tien afzonderlijke websites kwamen in de geraadpleegde resultaten voor; de volgorde is geen Google-rangschikking.</p>
+      <p>De thema’s zijn redactioneel samengevat uit zichtbare titels en zoekfragmenten, niet overgenomen als bewezen productclaims. Terugkerende onderwerpen waren productoverzichten, categorieën, QC-foto’s, maatvoering en kosten. Aantallen producten, kwaliteitsclaims, beoordelingen en platformtarieven zijn niet als feiten overgenomen.</p>
+      <div class="table-shell" role="region" aria-label="Onderzoek van tien afzonderlijke websites" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Website</th>
+              <th scope="col">Waargenomen zoek- of inhoudsthema</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>kameymall-sheet.com</td><td>Productcategorieën, aankoopgidsen en controle van productinformatie.</td></tr>
+            <tr><td>kameymallspreadsheets.com</td><td>Productvondsten, foto’s en prijsvergelijking.</td></tr>
+            <tr><td>kameymallspreadsheet.net</td><td>Modeoverzichten en navigatie per categorie.</td></tr>
+            <tr><td>chinareptools.com</td><td>Zoeken in spreadsheets en productverwijzingen.</td></tr>
+            <tr><td>kameymallspreadsheet.org</td><td>Koopgidsen, QC en verzendplanning.</td></tr>
+            <tr><td>kameymallspreadsheet.com</td><td>Productselectie, maten en kosteninschatting.</td></tr>
+            <tr><td>scamadviser.com</td><td>Websitecontrole en betrouwbaarheidssignalen.</td></tr>
+            <tr><td>kameymalltable.com</td><td>Algemene oriëntatie op Chinese winkelplatforms.</td></tr>
+            <tr><td>kameymallchina.com</td><td>Algemene zoekcontext rond KameyMall.</td></tr>
+            <tr><td>jadeship.com</td><td>Overzichten van spreadsheets voor verschillende aankoopdiensten.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Deze notitie beschrijft de onderzoeksbasis. De praktische artikelen hierboven zijn zelfstandig geschreven; ontbrekende platformvoorwaarden worden niet ingevuld met aannames.</p>
+    </details>
+
+    <section class="closing" aria-labelledby="verder-titel">
+      <div>
+        <h2 id="verder-titel">Klaar om gericht te kijken?</h2>
+        <p>Kies een categorie, noteer je eisen en controleer de details.</p>
+      </div>
+      <a class="button" href="https://www.cafans.com">Verder naar Cafans <span aria-hidden="true">&nbsp;↗</span></a>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p><strong>CAFANS / veldgids.</strong> Nederlandstalige informatie voor productonderzoek. Deze pagina verwerkt geen bestellingen. Sfeerfoto’s zijn geen bewijs van voorraad, authenticiteit of een commerciële relatie. Controleer actuele informatie bij de betreffende aanbieder.</p>
+    <a href="https://www.cafans.com">Bezoek Cafans ↗</a>
+  </footer>
+</body>
+</html>
